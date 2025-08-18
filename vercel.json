@@ -1,16 +1,4 @@
 {
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs18.x",
-      "memory": 1024,
-      "maxDuration": 10
-    },
-    "api/stripe-webhook.js": {
-      "runtime": "nodejs18.x",
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
   "routes": [
     { "src": "^/stripe/webhook$", "dest": "/api/stripe-webhook.js" },
     { "src": "^/api/(.*)$", "dest": "/api/index.js" }
