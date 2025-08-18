@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "api/stripe-webhook.js": {
+      "maxDuration": 10,
+      "memory": 1024
+    }
+  },
+  "routes": [
+    { "src": "/stripe/webhook", "dest": "/api/stripe-webhook.js" }
+  ]
+}
