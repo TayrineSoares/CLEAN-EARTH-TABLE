@@ -1,6 +1,7 @@
 {
   "routes": [
     { "src": "^/stripe/webhook$", "dest": "/api/stripe-webhook.js" },
+    { "src": "^/api/health$", "dest": "/api/health.js" },
     { "src": "^/api/(.*)$", "dest": "/api/index.js" }
   ]
 }
