@@ -12,14 +12,20 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^3.9.0",
     "@stripe/stripe-js": "^7.8.0",
-    "@supabase/supabase-js": "^2.52.0",
+    "@supabase/supabase-js": "^2.55.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "formik": "^2.4.6",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.525.0",
+    "morgan": "^1.10.1",
+    "raw-body": "^3.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-input-mask": "^2.0.4",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "resend": "^6.0.1",
+    "stripe": "^18.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
