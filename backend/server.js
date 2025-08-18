@@ -23,7 +23,11 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_SK);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
+
+app.get('/api/health', (_req, res) => {
+  res.send('ok');
+});
 
 //MAKE SURE THIS COMES BEFORE EXPRESS.JSON
 // This route is called by Stripe (not the frontend) after a customer successfully pays
@@ -238,6 +242,10 @@ app.use('/dev', testEmail);
 
 
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+  });
+}
+
+module.exports = app;
