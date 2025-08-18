@@ -1,0 +1,43 @@
+[33mbacb9e8[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: deploying
+[33ma22dc80[m HEAD@{1}: commit: deploying
+[33mf31091e[m HEAD@{2}: pull origin master: Fast-forward
+[33maaa0399[m HEAD@{3}: commit: styling fixes
+[33m3022b22[m HEAD@{4}: pull origin master: Merge made by the 'recursive' strategy.
+[33mf0e07a8[m HEAD@{5}: commit: styling changes
+[33m38def2e[m HEAD@{6}: commit: added a way for users to select delivery as per instructions of website owners. added phone number collection at checkout
+[33m6083474[m HEAD@{7}: pull origin master: Fast-forward
+[33ma5026c0[m HEAD@{8}: commit: fixed styling issue in checkout page
+[33mce1e3ac[m HEAD@{9}: pull origin master: Merge made by the 'recursive' strategy.
+[33m57f5e2b[m HEAD@{10}: commit: fixing more styling issues. added a load more feature on products
+[33m129eac8[m HEAD@{11}: commit: added a indicator on cart icon when cart length is greater then 0
+[33m278b8ea[m HEAD@{12}: commit: fixed styling issues with products on product page
+[33mf55d2a4[m HEAD@{13}: commit: fixed styling
+[33m48ef90d[m HEAD@{14}: commit: added a privacy policy route and check boxes before ordering and signing up
+[33mfb4fd43[m HEAD@{15}: commit: added a checkout button on cart
+[33m6fac843[m HEAD@{16}: commit (merge): restyled all pages besides admin page to be responsive at multiple screen sizes
+[33m33a9704[m HEAD@{17}: commit: for merging
+[33mad953fd[m HEAD@{18}: commit: finishing styling on pages that havent been completely styled/ fixes small errors
+[33mf324ee2[m HEAD@{19}: pull origin master: Merge made by the 'recursive' strategy.
+[33m6def390[m HEAD@{20}: commit: mergining
+[33mc350ce7[m HEAD@{21}: pull origin master: Merge made by the 'recursive' strategy.
+[33m98e02e9[m HEAD@{22}: pull origin master: Merge made by the 'recursive' strategy.
+[33m963552c[m HEAD@{23}: commit: fixing pull
+[33m111ca4e[m HEAD@{24}: commit: styled profile page as well as started route for product detail. need to finish page
+[33m3e7dd23[m HEAD@{25}: pull origin master: Fast-forward
+[33mbaba746[m HEAD@{26}: commit: styled signup page
+[33m2989cc8[m HEAD@{27}: commit: adding styling to contact
+[33m53ce1bd[m HEAD@{28}: pull origin master: Fast-forward
+[33m9a39fad[m HEAD@{29}: pull origin master: Fast-forward
+[33m49c29b8[m HEAD@{30}: commit: styled cart popup
+[33m04a70cb[m HEAD@{31}: commit: added a cart popup when shopping
+[33m57a70a3[m HEAD@{32}: commit: styled product page
+[33m95e11cc[m HEAD@{33}: commit: styled about me page
+[33m4c8b8e8[m HEAD@{34}: pull origin master: Fast-forward
+[33md25e41b[m HEAD@{35}: commit: fixed font style
+[33m0965e62[m HEAD@{36}: commit: finishing home page
+[33mdb9195c[m HEAD@{37}: commit: working on footer of homepage
+[33m01937c6[m HEAD@{38}: commit: continue to style homepage
+[33m3311b6d[m HEAD@{39}: commit: styling nav bar and home page
+[33mb7056df[m HEAD@{40}: commit: adding styling to nav and home page
+[33m9912b3e[m HEAD@{41}: pull origin master: Fast-forward
+[33meb97d10[m[33m ([m[1;31morigin/tayrine/userinfo3[m[33m)[m HEAD@{42}: clone: from https://github.com/TayrineSoares/earth-table.git
