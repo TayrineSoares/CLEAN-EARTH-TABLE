@@ -5,10 +5,9 @@ const path = require('path');
 let handler; // lazy init
 
 module.exports = async (req, res) => {
-  // Normalize URL (Vercel forwards the original path)
   const url = req.url || '';
 
-  // Fast path for the API root so we never hang here
+  // Fast path for API root so it never hangs
   if (url === '/api' || url === '/api/') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -16,10 +15,20 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // Lazily wrap the Express app (avoids heavy import on first ping)
+  // Lazily wrap the Express app
   if (!handler) {
+    console.time('load-express');
     const app = require(path.join('..', 'backend', 'server.js'));
-    handler = serverless(app, { basePath: '/api' });
+    console.timeEnd('load-express');
+    handler = serverless(app); // ⬅️ no basePath — we’ll rewrite req.url below
+    console.log('serverless handler ready');
+  }
+
+  // Normalize the path so Express sees "/cart" instead of "/api/cart"
+  if (req.url.startsWith('/api/')) {
+    req.url = req.url.slice(4) || '/';
+  } else if (req.url === '/api') {
+    req.url = '/';
   }
 
   return handler(req, res);
