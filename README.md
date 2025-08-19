@@ -20,7 +20,7 @@ Navigate to the `backend` directory, install dependencies, and start the server:
 - npm install
 - npm start
 
-The backend will run on `https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api`
+The backend will run on `https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api`
 
 ### Start the Frontend
 

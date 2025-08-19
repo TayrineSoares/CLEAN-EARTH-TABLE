@@ -56,7 +56,7 @@ const Register = ({setUser}) => {
     }
 
     try {
-      const res = await fetch('https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api/register', {
+      const res = await fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

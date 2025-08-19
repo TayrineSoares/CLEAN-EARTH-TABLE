@@ -17,13 +17,13 @@ function ProductDetail() {
   };
 
   useEffect(() => {
-    fetch(`https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api/products/${id}`)
+    fetch(`https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/products/${id}`)
       .then(res => res.json())
       .then(data => {
         setProduct(data);
         setLoading(false);
       })
-      fetch('https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api/tags')
+      fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/tags')
       .then(res => res.json())
       .then(data => {
         console.log("Fetched tags:", data);  

@@ -147,7 +147,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request, 
 
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api'],
+  origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api'],
   credentials: true
 }));
 app.use(morgan('dev'));

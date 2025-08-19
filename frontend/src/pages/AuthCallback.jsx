@@ -32,7 +32,7 @@ export default function AuthCallback() {
       if (!session) return navigate('/login');
 
       // Tell backend to create the profile after confirmation
-      const res = await fetch('https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api/register/confirmation', {
+      const res = await fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/register/confirmation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
