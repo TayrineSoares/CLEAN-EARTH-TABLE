@@ -9,7 +9,7 @@ const ResetPassword = () => {
     e.preventDefault();
     
     try {
-      const res = await fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/login/reset-password', {
+      const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/login/reset-password', {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',

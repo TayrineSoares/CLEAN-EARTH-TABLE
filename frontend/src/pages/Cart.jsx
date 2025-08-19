@@ -20,7 +20,7 @@ const Cart = ({ cart, removeOneFromCart, addOneFromCart, removeAll }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/cart')
+    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/cart')
       .then(res => {
         if(!res.ok) {
           throw new Error(`HTTP Error.${res.status}`);
@@ -71,7 +71,7 @@ const Cart = ({ cart, removeOneFromCart, addOneFromCart, removeAll }) => {
 
     const stripe = await stripePromise;  
     
-    const response = await fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/create-checkout-session', {
+    const response = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

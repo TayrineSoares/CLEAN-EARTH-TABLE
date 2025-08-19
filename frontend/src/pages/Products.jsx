@@ -61,7 +61,7 @@ const Products = ({ addToCart }) => {
   
 
   useEffect(() => {
-    fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/products')
+    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products')
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! :${res.status}`)
@@ -77,7 +77,7 @@ const Products = ({ addToCart }) => {
         console.error(err);
         setIsLoading(false);
       });
-    fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/categories')
+    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories')
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! :${res.status}`)
@@ -87,7 +87,7 @@ const Products = ({ addToCart }) => {
       .then(data => {
         setAllCategories(data);
       });
-    fetch('https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api/tags')
+    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/tags')
       .then(res => res.json())
       .then(data => {
         console.log("Fetched tags:", data);  
