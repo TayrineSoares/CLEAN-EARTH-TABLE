@@ -1,3 +1,10 @@
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
 // USERS FUNCTIONS
 
 //Fetches whole user info object
@@ -7,7 +14,7 @@ const fetchUserByAuthId = async (authUserId) => {
     throw new Error("authUserId is required");
   }
 
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/users/${authUserId}`);
+  const res = await fetch(apiUrl(`/users/${authUserId}`));
   const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || "Failed to fetch user");
@@ -17,7 +24,7 @@ const fetchUserByAuthId = async (authUserId) => {
 
 // Fetch all users
 const fetchAllUsers = async () => {
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/users');
+  const res = await fetch(apiUrl('/users'));
   const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || "Failed to fetch users");
@@ -27,7 +34,7 @@ const fetchAllUsers = async () => {
 
 // Update user's admin permission 
 const updateUserAdmin = async (authUserId, isAdmin) => {
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/users/${authUserId}`, {
+  const res = await fetch(apiUrl(`/users/${authUserId}`), {
     method: 'PATCH', 
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ is_admin: isAdmin }),
@@ -47,7 +54,7 @@ const updateUserAdmin = async (authUserId, isAdmin) => {
 
 //Fetch ALL categories
 const fetchAllCategories = async () => {
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories');
+  const res = await fetch(apiUrl('/categories'));
   const data = await res.json(); 
 
   if (!res.ok) throw new Error(data.error || "Failed to fetch user");
@@ -58,7 +65,7 @@ const fetchAllCategories = async () => {
 
 // Add New Category 
 const addCategory = async (categoryData) => {
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories', {
+  const res = await fetch(apiUrl('/categories'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -76,7 +83,7 @@ const addCategory = async (categoryData) => {
 
 // Update an existing category 
 const updateCategory = async (categoryToUpdate) => {
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories/${categoryToUpdate.id}` , {
+  const res = await fetch(apiUrl(`/categories/${categoryToUpdate.id}`) , {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -94,7 +101,7 @@ const updateCategory = async (categoryToUpdate) => {
 
 //Delete an existing category 
 const deleteCategory = async (id) => {
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories/${id}` , {
+  const res = await fetch(apiUrl(`/categories/${id}`) , {
     method: 'DELETE',
   });
 
@@ -111,7 +118,7 @@ const uploadCategoryImage = async (file) => {
   const formData = new FormData();
   formData.append('image', file);
 
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories/upload', {
+  const res = await fetch(apiUrl('/categories/upload'), {
     method: 'POST',
     body: formData,
   });
@@ -129,7 +136,7 @@ const uploadCategoryImage = async (file) => {
 
 //Fetch ALL products 
 const fetchAllProducts = async () => {
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products');
+  const res = await fetch(apiUrl('/products'));
 
   if (!res.ok) {
     const data = await res.json();
@@ -144,7 +151,7 @@ const fetchAllProducts = async () => {
 
 //Add a new product
 const addProduct = async (productData) => {
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products', {
+  const res = await fetch(apiUrl('/products'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(productData),
@@ -159,7 +166,7 @@ const addProduct = async (productData) => {
 
 //Update an existing product
 const updateProduct = async (updatedProduct) => {
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products/${updatedProduct.id}`, {
+  const res = await fetch(apiUrl(`/products/${updatedProduct.id}`), {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -177,7 +184,7 @@ const updateProduct = async (updatedProduct) => {
 // Archive a product 
 const toggleProductActive = async (id, makeActive) => {
   try {
-    const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products/${id}/archive`, {
+    const res = await fetch(apiUrl(`/products/${id}/archive`), {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ active: !!makeActive })
@@ -198,7 +205,7 @@ const uploadProductImage = async (file) => {
   const formData = new FormData();
   formData.append('image', file);
 
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products/upload', {
+  const res = await fetch(apiUrl('/products/upload'), {
     method: 'POST',
     body: formData,
   });
@@ -214,7 +221,7 @@ const uploadProductImage = async (file) => {
 
 // fetch all tags 
 const fetchAllTags = async () => {
-  const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/tags');
+  const res = await fetch(apiUrl('/tags'));
   const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || "Failed to fetch tags");
@@ -224,7 +231,7 @@ const fetchAllTags = async () => {
 
 // fetch tags for a specific product by id 
 const fetchProductTags = async (productId) => {
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products/${productId}/tags`);
+  const res = await fetch(apiUrl(`/products/${productId}/tags`));
   const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || "Failed to fetch product tags");
@@ -234,7 +241,7 @@ const fetchProductTags = async (productId) => {
 
 // update tags of a selected product
 const updateProductTags = async (productId, tagIds) => {
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products/${productId}/tags`, {
+  const res = await fetch(apiUrl(`/products/${productId}/tags`), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

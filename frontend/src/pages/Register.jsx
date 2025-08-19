@@ -3,6 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import loginImage from "../assets/images/accountImage.png"
 import "../styles/Register.css"
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
+
 const Register = ({setUser}) => {
   const [ email, setEmail ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -56,7 +64,7 @@ const Register = ({setUser}) => {
     }
 
     try {
-      const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/register', {
+      const res = await fetch(apiUrl('/register'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

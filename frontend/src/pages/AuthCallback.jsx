@@ -3,6 +3,14 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
+
 export default function AuthCallback() {
   const navigate = useNavigate();
 
@@ -32,7 +40,7 @@ export default function AuthCallback() {
       if (!session) return navigate('/login');
 
       // Tell backend to create the profile after confirmation
-      const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/register/confirmation', {
+      const res = await fetch(apiUrl('/register/confirmation'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -8,6 +8,13 @@ import PickupSelector from '../components/PickupSelector';
 import "../styles/Cart.css"
 import { Link} from "react-router-dom";
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
 
 const Cart = ({ cart, removeOneFromCart, addOneFromCart, removeAll }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +27,7 @@ const Cart = ({ cart, removeOneFromCart, addOneFromCart, removeAll }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/cart')
+    fetch(apiUrl('/cart'))
       .then(res => {
         if(!res.ok) {
           throw new Error(`HTTP Error.${res.status}`);
@@ -71,7 +78,7 @@ const Cart = ({ cart, removeOneFromCart, addOneFromCart, removeAll }) => {
 
     const stripe = await stripePromise;  
     
-    const response = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/create-checkout-session', {
+    const response = await fetch(apiUrl('/create-checkout-session'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

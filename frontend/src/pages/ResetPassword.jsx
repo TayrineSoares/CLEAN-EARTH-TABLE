@@ -2,6 +2,14 @@ import { useState } from "react";
 import loginImage from "../assets/images/accountImage.png"
 import "../styles/ResetPassword.css"
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
+
 const ResetPassword = () => {
   const [ email, setEmail ] = useState("");
 
@@ -9,7 +17,7 @@ const ResetPassword = () => {
     e.preventDefault();
     
     try {
-      const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/login/reset-password', {
+      const res = await fetch(apiUrl('/login/reset-password'), {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',

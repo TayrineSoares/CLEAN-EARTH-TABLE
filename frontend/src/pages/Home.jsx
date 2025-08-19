@@ -7,12 +7,19 @@ import headerImage from "../assets/images/headerImage.png";
 import logoNoBackground from "../assets/images/logoNoBackground.png";
 import arrow from  "../assets/images/arrow.png"
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
 const Home = () => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories')
+    fetch(apiUrl('/categories'))
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP Error. ${res.status}`);

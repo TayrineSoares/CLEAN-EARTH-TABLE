@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Vegan, LeafyGreen, Ham, MilkOff, BeanOff } from 'lucide-react';
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -17,13 +24,13 @@ function ProductDetail() {
   };
 
   useEffect(() => {
-    fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products/${id}`)
+    fetch(apiUrl(`/products/${id}`))
       .then(res => res.json())
       .then(data => {
         setProduct(data);
         setLoading(false);
       })
-      fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/tags')
+      fetch(apiUrl('/tags'))
       .then(res => res.json())
       .then(data => {
         console.log("Fetched tags:", data);  

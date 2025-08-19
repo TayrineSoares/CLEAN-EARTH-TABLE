@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import "../styles/ContactForm.css"
 
+
+const API_BASE = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const apiUrl = (p) => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
+
 const ContactForm = () => {
   const [form, setForm] = useState({
     name: '',
@@ -18,7 +23,7 @@ const ContactForm = () => {
     setStatus('Sending...');
 
     try {
-      const res = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/contact', {
+      const res = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

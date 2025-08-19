@@ -1,8 +1,14 @@
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
 
 
 const fetchOrderBySessionId = async (sessionId) => {
   try {
-    const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/orders/session/${sessionId}`);
+    const res = await fetch(apiUrl(`/orders/session/${sessionId}`));
     
     if (!res.ok) {
       throw new Error(`Failed to fetch order: ${res.status}`);
@@ -18,7 +24,7 @@ const fetchOrderBySessionId = async (sessionId) => {
 
 const fetchOrdersByAuthId = async (authUserId) => {
   try {
-    const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/orders/user/${authUserId}`); 
+    const res = await fetch(apiUrl(`/orders/user/${authUserId}`)); 
 
     if(!res.ok) {
       throw new Error(`Failed to fetch orders: ${res.status}`);
@@ -36,7 +42,7 @@ const fetchOrdersByAuthId = async (authUserId) => {
 
 const fetchAllOrders = async () => {
   try {
-    const response = await fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/orders');
+    const response = await fetch(apiUrl('/orders'));
     if (!response.ok) {
       throw new Error(`Failed to fetch orders: ${response.statusText}`);
     }
@@ -53,7 +59,7 @@ const fetchAllOrders = async () => {
 const fetchOrderById = async (orderId) => {
   
   try {
-    const response = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/orders/${orderId}`);
+    const response = await fetch(apiUrl(`/orders/${orderId}`));
     if (!response.ok) {
         throw new Error(`Failed to fetch order ${orderId}: ${response.status}`);
     }
@@ -68,7 +74,7 @@ const fetchOrderById = async (orderId) => {
 
 const setOrderPickedUp = async (orderId, picked) => {
 
-  const res = await fetch(`https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/orders/${orderId}/picked-up`, {
+  const res = await fetch(apiUrl(`/orders/${orderId}/picked-up`), {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ picked_up: !!picked }),
@@ -81,8 +87,6 @@ const setOrderPickedUp = async (orderId, picked) => {
   return res.json();
 
 }
-
-
 
 
 export { 

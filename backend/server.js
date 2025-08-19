@@ -19,6 +19,11 @@ const { getUserByAuthId } = require('./src/queries/user');
 
 require('dotenv').config();
 
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://127.0.0.1:5173')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_SK);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -147,8 +152,12 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request, 
 
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://clean-earth-table-h5efsrm5v-earth-table.vercel.app/api'],
-  credentials: true
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true);                 // server-to-server, curl
+    if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
+    return cb(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
 }));
 app.use(morgan('dev'));
 app.use(express.json());

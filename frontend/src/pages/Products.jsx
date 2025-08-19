@@ -5,6 +5,13 @@ import loadingAnimation from '../assets/loading.json'
 import { useParams, Link } from "react-router-dom";
 import { Vegan, LeafyGreen, Ham, MilkOff, BeanOff } from 'lucide-react';
 
+// One source of truth for your API base:
+const ROOT = (import.meta.env.VITE_API_BASE || 'http://localhost:8080').replace(/\/+$/, '');
+const API_BASE = `${ROOT}/api`;
+
+// Small helper to safely join paths (accepts '/users' or 'users'):
+const apiUrl = (p = '') => `${API_BASE}${p.startsWith('/') ? '' : '/'}${p}`;
+
 
 const Products = ({ addToCart }) => {
 
@@ -61,7 +68,7 @@ const Products = ({ addToCart }) => {
   
 
   useEffect(() => {
-    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/products')
+    fetch(apiUrl('/products'))
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! :${res.status}`)
@@ -77,7 +84,7 @@ const Products = ({ addToCart }) => {
         console.error(err);
         setIsLoading(false);
       });
-    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/categories')
+    fetch(apiUrl('/categories'))
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! :${res.status}`)
@@ -87,7 +94,7 @@ const Products = ({ addToCart }) => {
       .then(data => {
         setAllCategories(data);
       });
-    fetch('https://clean-earth-table-7ewadg0u2-earth-table.vercel.app/api/tags')
+    fetch(apiUrl('/tags'))
       .then(res => res.json())
       .then(data => {
         console.log("Fetched tags:", data);  
