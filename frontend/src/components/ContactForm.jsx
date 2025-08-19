@@ -18,7 +18,7 @@ const ContactForm = () => {
     setStatus('Sending...');
 
     try {
-      const res = await fetch('http://localhost:8080/contact', {
+      const res = await fetch('https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

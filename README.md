@@ -1,4 +1,4 @@
-# Earth Table 
+# Earth Table
 
 ## Project Structure
 
@@ -15,11 +15,12 @@ This project requires **two servers running simultaneously**:
 ### Start the Backend
 
 Navigate to the `backend` directory, install dependencies, and start the server:
+
 - cd backend
 - npm install
 - npm start
 
-The backend will run on `http://localhost:8080`
+The backend will run on `https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api`
 
 ### Start the Frontend
 

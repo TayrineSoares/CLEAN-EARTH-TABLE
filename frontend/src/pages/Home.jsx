@@ -12,7 +12,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8080/categories')
+    fetch('https://clean-earth-table-q1c5u5vhq-earth-table.vercel.app/api/categories')
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP Error. ${res.status}`);
