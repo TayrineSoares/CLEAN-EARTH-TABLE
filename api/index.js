@@ -1,13 +1,12 @@
 // api/index.js
-const serverless = require('serverless-http');
 const path = require('path');
 
-let handler; // lazy init
+let app; // lazy init
 
 module.exports = async (req, res) => {
   const url = req.url || '';
 
-  // Fast path for API root so it never hangs
+  // Fast path for the API root so it never hangs
   if (url === '/api' || url === '/api/') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -15,21 +14,19 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // Lazily wrap the Express app
-  if (!handler) {
+  // Lazily load the Express app (speeds up cold start)
+  if (!app) {
     console.time('load-express');
-    const app = require(path.join('..', 'backend', 'server.js'));
+    app = require(path.join('..', 'backend', 'server.js'));
     console.timeEnd('load-express');
-    handler = serverless(app); // ⬅️ no basePath — we’ll rewrite req.url below
-    console.log('serverless handler ready');
+    console.log('express app ready');
   }
 
-  // Normalize the path so Express sees "/cart" instead of "/api/cart"
-  if (req.url.startsWith('/api/')) {
-    req.url = req.url.slice(4) || '/';
-  } else if (req.url === '/api') {
-    req.url = '/';
+  // Strip the /api prefix so Express sees the real path (e.g., "/cart")
+  if (req.url.startsWith('/api')) {
+    req.url = req.url.replace(/^\/api(\/|$)/, '/');
   }
 
-  return handler(req, res);
+  // Hand off directly to Express (it’s a plain Node handler)
+  return app(req, res);
 };
